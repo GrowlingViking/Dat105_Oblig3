@@ -3,7 +3,8 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    priorityqueue.cpp
 
 SUBDIRS += \
     f13-v14.pro
@@ -18,4 +19,5 @@ HEADERS += \
     edge.h \
     graph.h \
     graphadt.h \
-    node.h
+    node.h \
+    priorityqueue.h
