@@ -77,7 +77,17 @@ void Graph::removeEdge(Edge *e)
 
 void Graph::removeVertex(Node *n)
 {
-    // TODO
+    int pos = -1;
+    for (int i = 0; i < verticeList.size(); i ++) {
+        if (n == verticeList(i)) {
+            pos = i;
+        }
+    }
+    if (pos == -1) {
+        cout << "Node not found" << endl;
+    } else {
+        verticeList.erase(pos);
+    }
 }
 
 std::vector<Edge*>& Graph::incidentEdges(Node *n)
