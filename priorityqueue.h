@@ -44,6 +44,8 @@ priorityQueue::~priorityQueue() {
 void priorityQueue::add(Edge *e) {
     if (isEmpty()) {
         container.push_back(e);
+    } else if (e->weight < container.end()->weight) {
+        container.push_back(e);
     } else {
         int i = 0;
         while (e->weight < container.at(i)->weight) {
