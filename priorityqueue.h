@@ -23,6 +23,9 @@ public:
     /* Returns the top element in the queue */
     Edge* top();
 
+    /* Overload the += operator */
+    void operator +=(Edge* e);
+
     /* Container */
     vector<Edge> container;
 };
@@ -38,7 +41,7 @@ priorityQueue::~priorityQueue() {
 }
 
 /* Add an Edge object */
-priorityQueue::add(Edge *e) {
+void priorityQueue::add(Edge *e) {
     if (isEmpty()) {
         container.push_back(e);
     } else {
@@ -51,7 +54,7 @@ priorityQueue::add(Edge *e) {
 }
 
 /* Remove the edge with the highest priority */
-priorityQueue::remove() {
+void priorityQueue::remove() {
     if (isEmpty()) {
         cout << "The queue is empty" << endl;
     } else {
@@ -60,13 +63,18 @@ priorityQueue::remove() {
 }
 
 /* Checks if the queue is empty */
-priorityQueue::isEmpty() {
+bool priorityQueue::isEmpty() {
     return container.empty();
 }
 
 /* Returns the top element of the queue */
-priorityQueue::top() {
+Edge* priorityQueue::top() {
     return container.back();
+}
+
+/* Overload the += operator */
+void priorityQueue::operator +=(Edge* e) {
+    add(e);
 }
 
 #endif // PRIORITYQUEUE_H
