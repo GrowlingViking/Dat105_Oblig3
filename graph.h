@@ -74,7 +74,26 @@ void Graph::insertEdge(Node *v, Node *w, int i)
 
 void Graph::removeEdge(Edge *e)
 {
-    // TODO
+    Edge* x;
+    int pos = -1;
+    for (int i = 0; i < edgeList.size(); i ++) {
+        if (e == edgeList[i]) {
+            pos = i;
+        }
+    }
+    if (pos == -1) {
+        cout << "Edge not found" << endl;
+    } else {
+        x = edgeList[pos];
+        for (Node* n : x->endpoint) {
+            for (int j = 0; j < n->edgeList.size(); j ++) {
+                if (e == n->edgeList[j]) {
+                    n->edgeList.erase(edgeList.begin() + j);
+                }
+            }
+        }
+        edgeList.erase(edgeList.begin() + pos);
+    }
 }
 
 void Graph::removeVertex(Node *n)
@@ -92,12 +111,12 @@ void Graph::removeVertex(Node *n)
         x = verticeList[pos];
         for (Edge* e : x->edgeList) {
             if (e->endpoint[0] == n) {
-                e->endpoint[0] = null;
+                e->endpoint[0] = 0;
             } else if (e->endpoint[1] == n) {
-                e->endpoint[1] = null;
+                e->endpoint[1] = 0;
             }
         }
-        verticeList.erase(pos);
+        verticeList.erase(verticeList.begin() + pos);
     }
 }
 
