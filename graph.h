@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <functional>
 
+using namespace std;
+
 class Graph : public GraphADT {
 
 public:
@@ -77,15 +79,24 @@ void Graph::removeEdge(Edge *e)
 
 void Graph::removeVertex(Node *n)
 {
+    Node* x;
     int pos = -1;
     for (int i = 0; i < verticeList.size(); i ++) {
-        if (n == verticeList(i)) {
+        if (n == verticeList[i]) {
             pos = i;
         }
     }
     if (pos == -1) {
         cout << "Node not found" << endl;
     } else {
+        x = verticeList[pos];
+        for (Edge* e : x->edgeList) {
+            if (e->endpoint[0] == n) {
+                e->endpoint[0] = null;
+            } else if (e->endpoint[1] == n) {
+                e->endpoint[1] = null;
+            }
+        }
         verticeList.erase(pos);
     }
 }
