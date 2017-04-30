@@ -3,6 +3,8 @@
 #include "edge.h"
 #include <vector>
 
+using namespace std;
+
 class priorityQueue {
 public:
     /* Empty constructor */
@@ -27,12 +29,12 @@ public:
     void operator +=(Edge* e);
 
     /* Container */
-    vector<Edge> container;
+    vector<Edge*> container;
 };
 
 /* Empty constructor */
 priorityQueue::priorityQueue() {
-    vector<Edge> container;
+    vector<Edge*> container;
 }
 
 /* Destructor */
@@ -44,11 +46,11 @@ priorityQueue::~priorityQueue() {
 void priorityQueue::add(Edge *e) {
     if (isEmpty()) {
         container.push_back(e);
-    } else if (e->weight < container.end()->weight) {
+    } else if (e->weight < container.back()->weight) {
         container.push_back(e);
     } else {
-        int i = 0;
-        while (e->weight < container.at(i)->weight) {
+        vector<Edge*>::iterator i = container.begin();
+        while (e->weight < (*i)->weight) {
             i ++;
         }
         container.insert(i + 1, e);

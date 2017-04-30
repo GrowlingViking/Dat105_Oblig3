@@ -1,5 +1,6 @@
 #include <iostream>
 #include "graph.h"
+#include "priorityqueue.h"
 
 using namespace std;
 
@@ -51,12 +52,31 @@ int main()
     graf.removeVertex(b);
     graf.depthFirstTraversal(f);
     graf.breadthFirstTraversal(f);
-    vector<Edge*> v = graf.primsAlgorithm();
-    printVector(v);
+    //vector<Edge*> v = graf.primsAlgorithm();
+    //printVector(v);
     graf.dijkstrasAlgorithm(e);
     printVector(graf.vertices());
     printVector(graf.approxVertexCover());
     cout << graf.checkVertexCover(graf.approxVertexCover()) << endl;
+
+    priorityQueue pq;
+    Edge* e1 = new Edge(a, b, 1);
+    Edge* e2 = new Edge(b, c, 2);
+    Edge* e3 = new Edge(b, d, 3);
+    Edge* e4 = new Edge(c, e, 4);
+    Edge* e5 = new Edge(d, e, 5);
+    Edge* e6 = new Edge(b, c, 2);
+    Edge* e7 = new Edge(e, f, 1);
+
+    pq.add(e1);
+    pq.add(e2);
+    pq.add(e3);
+    pq.add(e4);
+    pq.add(e5);
+    pq += e6;
+    pq += e7;
+
+    pq.remove();
 
     return 0;
 }
