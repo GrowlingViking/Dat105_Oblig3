@@ -217,7 +217,24 @@ void Graph::depthFirstTraversal(Node* n){
 }
 
 void Graph::breadthFirstTraversal(Node* n){
-    // TODO
+    setAllUnvisited();
+    queue<Node*> verticeQueue;
+    verticeQueue.push(n);
+    while(!verticeQueue.empty()) {
+        Node* v = verticeQueue.front();
+        verticeQueue.pop();
+        if (!v->visited) {
+            for(vector<Edge*>::iterator i = v->edgeList.begin(); i != v->edgeList.end(); i ++) {
+                Node* x = opposite(v, *i);
+                if (!x->visited) {
+                    verticeQueue.push(x);
+                }
+            }
+            cout << v->data << " ";
+            v->visited = true;
+        }
+    }
+    cout << endl;
 }
 
 void Graph::setAllUnvisited()
