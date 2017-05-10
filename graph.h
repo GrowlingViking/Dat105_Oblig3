@@ -2,6 +2,7 @@
 #define GRAPH_H
 
 #include "graphadt.h"
+#include "priorityqueue.h"
 #include <stack>
 #include <queue>
 #include <algorithm>
@@ -259,7 +260,41 @@ public:
 
 
 std::vector<Edge*> Graph::primsAlgorithm(){
+    setAllUnvisited();
+    vector<Edge*> MST;
+    //Determin startnode
+    Node* s = verticeList[rand() % verticeList.size()];
+    s->visited = true;
+    priorityQueue* pq = new priorityQueue();
+    //Add the edges of the startnode to the priority queue
+    for (vector<Edge*>::iterator i = s->edgeList.begin(); i != s->edgeList.end(); i ++) {
+        pq->add(*i);
+    }
 
+    while (!pq->isEmpty()) {
+        Edge* e = pq->top();
+        pq->remove();
+
+        Node* w;
+        if (!e->endpoint[0]->visited) {
+            w = e->endpoint[0];
+        } else if (!e->endpoint[1]->visited){
+            w = e->endpoint[1];
+        }
+
+        MST.push_back(e);
+
+        w->visited = true;
+        for (vector<Edge*>::iterator i = w->edgeList.begin(); i != w->edgeList.end(); i ++) {
+            Edge* x = *i;
+            if (!x->endpoint[0]->visited) {
+                pq->add(*i);
+            } else if (!x->endpoint[1]->visited) {
+                pq->add(*i);
+            }
+        }
+    }
+    return MST;
 }
 
 /*

@@ -52,8 +52,8 @@ int main()
     graf.removeVertex(b);
     graf.depthFirstTraversal(f);
     graf.breadthFirstTraversal(f);
-    //vector<Edge*> v = graf.primsAlgorithm();
-    //printVector(v);
+    vector<Edge*> v = graf.primsAlgorithm();
+    printVector(v);
     graf.dijkstrasAlgorithm(e);
     printVector(graf.vertices());
     printVector(graf.approxVertexCover());
